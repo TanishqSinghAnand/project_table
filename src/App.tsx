@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Table from "./components/Table";
 import Modal from "./components/Modal";
 
+//Creating interface for each User
 interface User {
   id: number;
   name: string;
@@ -18,10 +19,11 @@ interface User {
 }
 
 function App() {
-  const [show, setShow] = useState<boolean>(false);
-  const [users, setUsers] = useState<User[]>([]);
+  const [show, setShow] = useState<boolean>(false); //Modal visibility status
+  const [users, setUsers] = useState<User[]>([]); // All users
 
   useEffect(() => {
+    //Fetching Data via axios 
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
@@ -37,6 +39,7 @@ function App() {
   }, []);
 
   const addUser = (newUser: User) => {
+    //Adding new element to existing user elements
     let newArr = [...users, newUser];
     setUsers(newArr);
   };
@@ -44,6 +47,7 @@ function App() {
   return (
     <Router>
       <div className="home">
+        {/* Displaying seprate components */}
         <Table users={users} />
         <button onClick={() => setShow(true)} className="add_btn">
           Add User

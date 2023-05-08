@@ -1,11 +1,14 @@
 import "./Modal.css";
 import { useEffect, useState } from "react";
 
+// Modal Props interface
 interface ModalProps {
   show: boolean;
   onClose: () => void;
   addUserFunction: (newUser: User) => void;
 }
+
+// A sample user interface for each new user
 interface User {
   id: number;
   name: string;
@@ -31,6 +34,7 @@ const Modal = ({ show, onClose, addUserFunction }: ModalProps) => {
     },
   });
 
+//   Upadting feilds
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name === "name") {
@@ -62,6 +66,7 @@ const Modal = ({ show, onClose, addUserFunction }: ModalProps) => {
     }
   };
 
+//   Submitting the form and updating the global users Array in App.tsx
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     addUserFunction(user);
@@ -79,6 +84,7 @@ const Modal = ({ show, onClose, addUserFunction }: ModalProps) => {
     onClose();
   };
 
+  // Using argument for conditional display
   if (!show) {
     return null;
   } else {

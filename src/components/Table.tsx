@@ -13,15 +13,17 @@ interface User {
   };
 }
 
+// An interface for props
 interface TableProps {
   users:User[];
 }
 
 const Table=({users}:TableProps)=> {
+  // State for sorted users
   const [sortedUsers, setSortedUsers] = useState<User[]>([]);
 
   
-
+  // Sorting users when ever users, the argument is updated
   useEffect(() => {
     const sortedUsers = [...users].sort((a, b) => a.name.localeCompare(b.name));
     setSortedUsers(sortedUsers);
@@ -38,6 +40,7 @@ const Table=({users}:TableProps)=> {
         </tr>
       </thead>
       <tbody className="table_body">
+        {/* Mapping through the whole array to disply each individual table row */}
         {sortedUsers.map((user, id) => {
           return (
             <tr key={id}>
