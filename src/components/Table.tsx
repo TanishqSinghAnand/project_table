@@ -1,4 +1,4 @@
-import './Table.css';
+import "./Table.css";
 import { useEffect, useState } from "react";
 
 interface User {
@@ -15,14 +15,13 @@ interface User {
 
 // An interface for props
 interface TableProps {
-  users:User[];
+  users: User[];
 }
 
-const Table=({users}:TableProps)=> {
+const Table = ({ users }: TableProps) => {
   // State for sorted users
   const [sortedUsers, setSortedUsers] = useState<User[]>([]);
 
-  
   // Sorting users when ever users, the argument is updated
   useEffect(() => {
     const sortedUsers = [...users].sort((a, b) => a.name.localeCompare(b.name));
@@ -33,19 +32,34 @@ const Table=({users}:TableProps)=> {
     <table className="table">
       <thead className="table_head">
         <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>City</th>
-          <th>Company</th>
+          <th>
+            <center>Name</center>
+          </th>
+          <th>
+            <center>Email</center>
+          </th>
+          <th>
+            <center>City</center>
+          </th>
+          <th>
+            <center>Company</center>
+          </th>
         </tr>
       </thead>
       <tbody className="table_body">
         {/* Mapping through the whole array to disply each individual table row */}
         {sortedUsers.map((user, id) => {
+          const truncatedEmail =
+            window.innerWidth <= 768
+              ? `${user.email.slice(0, 15)}...`
+              : user.email;
+
           return (
             <tr key={id}>
               <td className="table_body_row"> {user.name}</td>
-              <td className="table_body_row">{user.email}</td>
+              <td className="table_body_row">
+                <a href={`mailto:${user.email}`}>{truncatedEmail} </a>
+              </td>
               <td className="table_body_row">{user.address.city}</td>
               <td className="table_body_row">{user.company.name}</td>
             </tr>
@@ -54,5 +68,5 @@ const Table=({users}:TableProps)=> {
       </tbody>
     </table>
   );
-}
+};
 export default Table;

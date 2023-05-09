@@ -1,5 +1,7 @@
 .modal {
   position: fixed;
+  width: 100vw;
+  height: 100vh;
   left: 0;
   top: 0;
   right: 0;
@@ -10,7 +12,7 @@
   justify-content: center;
 }
 .modal_content {
-  width: 400px;
+  width: 25rem;
   border-radius: 78px;
   border-radius: 54px;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
